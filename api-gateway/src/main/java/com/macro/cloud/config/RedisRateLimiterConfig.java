@@ -5,9 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
-/**
- * Created by macro on 2019/9/25.
- */
 @Configuration
 public class RedisRateLimiterConfig {
 //    @Bean

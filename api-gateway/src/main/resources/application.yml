@@ -6,7 +6,35 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: path_route #路由的ID
-          uri: ${service-url.user-service}/user/{id} #匹配后路由地址
-          predicates: # 断言，路径相匹配的进行路由
+        - id: path_route
+          uri: ${service-url.user-service}/user/{id}
+          predicates:
             - Path=/user/{id}
+        - id: after_route
+          uri: ${service-url.user-service}
+          predicates:
+            - After=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+        - id: before_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Before=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+        - id: before_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
+        - id: cookie_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Cookie=username,macro
+        - id: header_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Header=X-Request-Id, \d+
+        - id: host_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Host=**.bing.com
+        - id: method_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Method=GET

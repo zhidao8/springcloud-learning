@@ -8,14 +8,20 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * Created by macro on 2019/8/29.
- */
 @Service
 public class UserServiceImpl implements UserService {
     private List<User> userList;
+
+    @PostConstruct
+    public void initData() {
+        userList = new ArrayList<>();
+        userList.add(new User(1L, "user1", "123456"));
+        userList.add(new User(2L, "user2", "123456"));
+        userList.add(new User(3L, "user3", "123456"));
+    }
 
     @Override
     public void create(User user) {
@@ -49,23 +55,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        List<User> findUserList = userList.stream().filter(userItem -> userItem.getUsername().equals(username)).collect(Collectors.toList());
-        if (!CollectionUtils.isEmpty(findUserList)) {
-            return findUserList.get(0);
-        }
-        return null;
+        return userList.stream()
+                .filter(user -> Objects.equals(user.getUsername(), username))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public List<User> getUserByIds(List<Long> ids) {
         return userList.stream().filter(userItem -> ids.contains(userItem.getId())).collect(Collectors.toList());
-    }
-
-    @PostConstruct
-    public void initData() {
-        userList = new ArrayList<>();
-        userList.add(new User(1L, "macro", "123456"));
-        userList.add(new User(2L, "andy", "123456"));
-        userList.add(new User(3L, "mark", "123456"));
     }
 }

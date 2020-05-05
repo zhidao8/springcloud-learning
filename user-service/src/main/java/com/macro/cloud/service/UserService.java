@@ -4,9 +4,6 @@ import com.macro.cloud.domain.User;
 
 import java.util.List;
 
-/**
- * Created by macro on 2019/8/29.
- */
 public interface UserService {
     void create(User user);
 
