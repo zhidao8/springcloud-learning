@@ -5,14 +5,15 @@ spring:
     gateway:
       routes:
         - id: requestratelimiter_route
-          uri: http://localhost:8201
+          uri: http://localhost:8201/user/{id}
           filters:
             - name: RequestRateLimiter
               args:
-                redis-rate-limiter.replenishRate: 1 # 每秒允许处理的请求数量
-                redis-rate-limiter.burstCapacity: 2 # 每秒最大处理的请求数量
-                key-resolver: "#{@ipKeyResolver}" # 限流策略，对应策略的Bean
+                frequency-rate-limiter.period: 5000
+                frequency-rate-limiter.times: 2
+                key-resolver: "#{@hostKeyResolver}"
           predicates:
+            - Path=/user/{id}
             - Method=GET
 logging:
   level:

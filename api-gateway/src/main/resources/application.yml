@@ -6,35 +6,48 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: requestratelimiter_route
+          uri: ${service-url.user-service}/user/{id}
+          filters:
+            - name: RequestRateLimiter
+              args:
+                frequency-rate-limiter.period: 5000
+                frequency-rate-limiter.times: 2
+                key-resolver: "#{@hostKeyResolver}"
+          predicates:
+            - Path=/user/{id}
+            - Method=GET
+            - Header=api-version, 1
         - id: path_route
           uri: ${service-url.user-service}/user/{id}
           predicates:
             - Path=/user/{id}
-        - id: after_route
-          uri: ${service-url.user-service}
-          predicates:
-            - After=2019-09-24T16:30:00+08:00[Asia/Shanghai]
-        - id: before_route
-          uri: ${service-url.user-service}
-          predicates:
-            - Before=2019-09-24T16:30:00+08:00[Asia/Shanghai]
-        - id: before_route
-          uri: ${service-url.user-service}
-          predicates:
-            - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
-        - id: cookie_route
-          uri: ${service-url.user-service}
-          predicates:
-            - Cookie=username,macro
-        - id: header_route
-          uri: ${service-url.user-service}
-          predicates:
-            - Header=X-Request-Id, \d+
-        - id: host_route
-          uri: ${service-url.user-service}
-          predicates:
-            - Host=**.bing.com
-        - id: method_route
-          uri: ${service-url.user-service}
-          predicates:
             - Method=GET
+#        - id: after_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - After=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+#        - id: before_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Before=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+#        - id: before_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
+#        - id: cookie_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Cookie=username,user1
+#        - id: header_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Header=X-Request-Id, \d+
+#        - id: host_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Host=**.bing.com
+#        - id: method_route
+#          uri: ${service-url.user-service}
+#          predicates:
+#            - Method=GET

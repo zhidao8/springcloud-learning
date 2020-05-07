@@ -1,4 +1,4 @@
-package com.macro.cloud;
+package com.demo.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

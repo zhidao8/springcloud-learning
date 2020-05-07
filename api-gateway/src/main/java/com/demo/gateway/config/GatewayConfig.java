@@ -1,4 +1,4 @@
-package com.macro.cloud.config;
+package com.demo.gateway.config;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
