@@ -1,6 +1,6 @@
-package com.macro.cloud.service;
+package com.demo.user.service;
 
-import com.macro.cloud.domain.User;
+import com.demo.user.domain.User;
 
 import java.util.List;
 

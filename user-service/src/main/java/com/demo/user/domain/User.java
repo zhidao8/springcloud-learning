@@ -1,9 +1,18 @@
-package com.macro.cloud.domain;
+package com.demo.user.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("User")
 public class User {
 
+    @ApiModelProperty(value = "user id", example = "1")
     private Long id;
+
+    @ApiModelProperty(value = "user name", example = "name")
     private String username;
+
+    @ApiModelProperty(value = "user password", example = "password")
     private String password;
 
     public User() {

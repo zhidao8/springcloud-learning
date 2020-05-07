@@ -1,4 +1,4 @@
-package com.macro.cloud.domain;
+package com.demo.user.domain;
 
 public class CommonResult<T> {
     private T data;
@@ -19,7 +19,7 @@ public class CommonResult<T> {
     }
 
     public CommonResult(T data) {
-        this(data, "操作成功", 200);
+        this(data, "Success", 200);
     }
 
     public T getData() {

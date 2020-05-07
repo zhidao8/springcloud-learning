@@ -1,7 +1,7 @@
-package com.macro.cloud.service.impl;
+package com.demo.user.service.impl;
 
-import com.macro.cloud.domain.User;
-import com.macro.cloud.service.UserService;
+import com.demo.user.service.UserService;
+import com.demo.user.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
